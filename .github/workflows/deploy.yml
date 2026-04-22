@@ -14,7 +14,6 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
-# já opta pelo Node 24 nos actions antigos
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -23,16 +22,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5 # era v4
+        uses: actions/checkout@v5
 
       - name: Setup Node
-        uses: actions/setup-node@v5 # era v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 22 # LTS atual, em vez de 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
-        run: npm ci # usa o package-lock.json (mais rápido e seguro que npm install)
+        run: npm ci
 
       - name: Build with Astro
         run: npm run build
@@ -40,7 +39,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path:./dist
+          path:./dist # <-- espaço aqui
 
   deploy:
     needs: build
