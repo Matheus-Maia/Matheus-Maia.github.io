@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TimelineItem from '../components/TimelineItem.astro';
+
+// ─── AQUI VOCÊ ADICIONA SEUS UPDATES ───────────────────────────────────────
+// Basta adicionar um objeto novo no início do array.
+// tags disponíveis: estudando | deploy | projeto | bug fix | leitura | conquista
+
+const updates = [
+  {
+    date: 'Abr 2026',
+    title: 'Lancei meu blog pessoal de build in public',
+    body: 'Decidi documentar minha jornada de forma pública. O site está no ar via GitHub Pages, feito com Astro + Tailwind. Cada linha da timeline é um passo real.',
+    tags: ['deploy', 'conquista'],
+    link: '',
+    linkLabel: '',
+    isFirst: true,
+  },
+  {
+    date: 'Abr 2026',
+    title: 'ChirpStack + LoRaWAN em produção no systrixcentral',
+    body: 'Finalmente o pipeline de IoT está estável em Docker. Resolvi um problema de diretório .git corrompido e configurei as variáveis de ambiente do .env do zero.',
+    tags: ['deploy', 'bug fix'],
+  },
+  {
+    date: 'Mar 2026',
+    title: 'Refatorei o sistema de chuva no MeteoVale',
+    body: 'Identifiquei que nivel_chuva armazenava valores cumulativos brutos em vez de deltas por intervalo. Criei o campo chuva_intervalo_mm e um script de migração retroativa.',
+    tags: ['projeto', 'bug fix'],
+  },
+  {
+    date: 'Mar 2026',
+    title: 'Estudando Ciência da Computação — 3º semestre',
+    body: 'Cursando na Unifbra. Combinando a teoria da faculdade com os projetos reais que já estou rodando em produção. A diferença é brutal.',
+    tags: ['estudando'],
+  },
+  {
+    date: 'Fev 2026',
+    title: 'APK distribution do gestor_os_mobile via Django',
+    body: 'Criei um endpoint no backend para servir o APK diretamente aos usuários, evitando a Play Store em estágio beta. Resolvi problemas de signing config e versionCode no build.',
+    tags: ['projeto', 'deploy'],
+  },
+  {
+    date: 'Jan 2026',
+    title: 'SENAI Santos Dumont — Técnico em ADS concluído',
+    body: 'Fechei o técnico em Análise e Desenvolvimento de Sistemas e Softwares. Muito aprendizado prático, mas o que mais me ensinou foi construir o Gestor OS em paralelo.',
+    tags: ['conquista'],
+  },
+];
+---
+
+<Layout>
+  <main class="min-h-screen px-6 py-16 max-w-2xl mx-auto">
+
+    <!-- Header -->
+    <header class="mb-16 fade-up" style="animation-delay: 0s; opacity: 0;">
+      <div class="flex items-start justify-between">
+        <div>
+          <h1 class="font-display text-4xl md:text-5xl leading-none">Matheus<br/><em>Systrix</em></h1>
+          <p class="font-mono text-xs text-muted mt-3 tracking-wide uppercase">
+            Engenheiro de Software · São Paulo, BR
+          </p>
+        </div>
+
+        <!-- Status badge -->
+        <div class="flex items-center gap-2 mt-1">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+          </span>
+          <span class="font-mono text-[11px] text-muted">construindo em público</span>
+        </div>
+      </div>
+
+      <!-- Bio -->
+      <p class="text-muted text-sm leading-relaxed mt-6 max-w-md">
+        Construindo <strong class="text-ink font-medium">Gestor OS</strong>, <strong class="text-ink font-medium">MeteoVale</strong> e um pipeline IoT LoRaWAN em produção. 
+        Documumento o que aprendo aqui — sem filtro.
+      </p>
+
+      <!-- Links -->
+      <div class="flex gap-4 mt-5">
+        {[
+          { label: 'GitHub', href: 'https://github.com/Matheus-Maia' },
+          { label: 'LinkedIn', href: 'https://linkedin.com/in/Matheus-Maia' },
+          { label: 'Email', href: 'mailto:matheusmaiadev535@gmail.com' },
+        ].map(l => (
+          <a 
+            href={l.href}
+            class="font-mono text-xs text-muted hover:text-accent transition-colors underline underline-offset-2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {l.label}
+          </a>
+        ))}
+      </div>
+    </header>
+
+    <!-- Section title -->
+    <div class="fade-up mb-8" style="animation-delay: 0.1s; opacity: 0;">
+      <div class="flex items-center gap-3">
+        <span class="font-mono text-xs tracking-[0.2em] text-muted uppercase">Timeline</span>
+        <div class="h-px flex-1 bg-gray-200"></div>
+        <span class="font-mono text-xs text-muted">{updates.length} updates</span>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative">
+      <!-- Vertical line running the full height -->
+      <div class="absolute left-[4.5px] top-2 bottom-2 w-px bg-gray-200"></div>
+
+      <div class="flex flex-col gap-10">
+        {updates.map((item, i) => (
+          <TimelineItem
+            date={item.date}
+            title={item.title}
+            body={item.body}
+            tags={item.tags ?? []}
+            link={item.link}
+            linkLabel={item.linkLabel}
+            isFirst={item.isFirst ?? false}
+          />
+        ))}
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-20 pt-8 border-t border-gray-200">
+      <p class="font-mono text-[11px] text-muted text-center tracking-wide">
+        feito com Astro + Tailwind · hospedado no GitHub Pages
+      </p>
+    </footer>
+
+  </main>
+</Layout>
