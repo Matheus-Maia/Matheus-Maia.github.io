@@ -7,6 +7,23 @@ import TimelineItem from '../components/TimelineItem.astro';
 // tags disponíveis: estudando | deploy | projeto | bug fix | leitura | conquista
 
 const updates = [
+    {
+    date: 'Abr 2026',
+    title: 'Observabilidade de Docker para investigar sobrecarga em servidores',
+    body: `
+  Estou enfrentando problemas de sobrecarga nos servidores por questões de infraestrutura.
+
+  Para entender melhor o que está acontecendo, comecei a analisar o consumo de memória dos containers Docker usando docker stats.
+
+  Criei um fluxo de monitoramento que:
+  - Coleta uso de RAM dos containers em tempo real
+  - Armazena os dados em CSV
+  - Permite análise posterior em Jupyter Notebook
+
+  Durante a semana vou monitorar picos de consumo e identificar possíveis gargalos.
+  `,
+    tags: ['projeto', 'infra', 'observabilidade'],
+  },
   {
     date: 'Abr 2026',
     title: 'Deep Dive: Testes Avançados e Arquitetura',
